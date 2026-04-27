@@ -40,63 +40,87 @@ export function ProductDetailsPanel() {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="section-spacing max-w-4xl">
       {/* Header Section */}
-      <div className="p-4 border border-border rounded-lg bg-card">
-        <h2 className="text-lg font-semibold mb-4 text-foreground">Product Details Fetcher</h2>
-        
-        <button 
-          onClick={() => handleGetDetails('https://www.amazon.in/s?k=iphone')}
-          disabled={loading}
-          className="px-4 py-2 bg-primary text-primary-foreground rounded-lg font-medium hover:opacity-90 disabled:opacity-60 transition-opacity"
-        >
-          {loading ? 'Loading...' : 'Fetch iPhone Details'}
-        </button>
+      <div className="card-smooth p-4 sm:p-6 border border-border rounded-lg bg-gradient-to-br from-card to-card/95 shadow-md">
+        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <h2 className="text-2xl sm:text-3xl font-bold text-foreground mb-1">Product Details Fetcher</h2>
+            <p className="text-sm text-muted-foreground">Fetch and compare product information across platforms</p>
+          </div>
+          
+          <button 
+            onClick={() => handleGetDetails('https://www.amazon.in/s?k=iphone')}
+            disabled={loading}
+            className="button-smooth px-6 py-2.5 bg-gradient-to-r from-primary to-primary/90 text-primary-foreground rounded-lg font-semibold hover:shadow-lg hover:from-primary/90 hover:to-primary disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-200 w-full sm:w-auto"
+          >
+            {loading ? (
+              <div className="flex items-center justify-center gap-2">
+                <div className="w-4 h-4 rounded-full border-2 border-primary-foreground/30 border-t-primary-foreground animate-spin" />
+                Loading...
+              </div>
+            ) : (
+              '🔍 Fetch iPhone Details'
+            )}
+          </button>
+        </div>
 
-        {error && <p className="text-destructive mt-3 text-sm">{error}</p>}
+        {error && (
+          <div className="mt-4 p-3 rounded-lg bg-destructive/10 border border-destructive/20 animate-slide-up">
+            <p className="text-sm text-destructive font-semibold">❌ {error}</p>
+          </div>
+        )}
       </div>
 
       {details && (
         <>
           {/* Details Section */}
-          <div className="border border-border rounded-lg bg-card overflow-hidden">
+          <div className="border border-border rounded-lg bg-card overflow-hidden card-smooth card-hover shadow-sm">
             <button
               onClick={() => toggleSection('details')}
-              className="w-full flex items-center justify-between p-4 hover:bg-muted/50 transition-colors"
+              className="w-full flex items-center justify-between p-4 sm:p-5 hover:bg-muted/30 transition-colors duration-200"
             >
-              <h3 className="font-semibold text-foreground">Raw Product Details</h3>
+              <div className="text-left">
+                <h3 className="font-bold text-lg text-foreground">📋 Raw Product Details</h3>
+                <p className="text-xs text-muted-foreground mt-0.5">Complete API response data</p>
+              </div>
               <ChevronDown
-                className={`h-5 w-5 text-muted-foreground transition-transform ${
+                className={`h-5 w-5 text-muted-foreground transition-transform duration-300 flex-shrink-0 ${
                   expandedSections.details ? 'rotate-180' : ''
                 }`}
               />
             </button>
             
             {expandedSections.details && (
-              <div className="border-t border-border px-4 pb-4 pt-4">
-                <pre className="p-4 bg-muted rounded-lg overflow-auto text-xs text-foreground border border-border">
-                  {JSON.stringify(details, null, 2)}
-                </pre>
+              <div className="border-t border-border px-4 sm:px-5 pb-4 sm:pb-5 pt-4 animate-slide-down">
+                <div className="bg-muted/40 rounded-lg overflow-hidden border border-border/50">
+                  <pre className="p-4 overflow-x-auto text-xs sm:text-xs text-foreground font-mono leading-relaxed">
+                    {JSON.stringify(details, null, 2)}
+                  </pre>
+                </div>
               </div>
             )}
           </div>
 
           {/* Price History Section */}
-          <div className="border border-border rounded-lg bg-card overflow-hidden">
+          <div className="border border-border rounded-lg bg-card overflow-hidden card-smooth card-hover shadow-sm">
             <button
               onClick={() => toggleSection('history')}
-              className="w-full flex items-center justify-between p-4 hover:bg-muted/50 transition-colors"
+              className="w-full flex items-center justify-between p-4 sm:p-5 hover:bg-muted/30 transition-colors duration-200"
             >
-              <h3 className="font-semibold text-foreground">📊 Price History</h3>
+              <div className="text-left">
+                <h3 className="font-bold text-lg text-foreground">📊 Price History & Analytics</h3>
+                <p className="text-xs text-muted-foreground mt-0.5">Track price trends and savings</p>
+              </div>
               <ChevronDown
-                className={`h-5 w-5 text-muted-foreground transition-transform ${
+                className={`h-5 w-5 text-muted-foreground transition-transform duration-300 flex-shrink-0 ${
                   expandedSections.history ? 'rotate-180' : ''
                 }`}
               />
             </button>
             
             {expandedSections.history && (
-              <div className="border-t border-border px-4 pb-4 pt-4">
+              <div className="border-t border-border px-4 sm:px-5 pb-4 sm:pb-5 pt-4 animate-slide-down">
                 <ProductHistory
                   priceHistory={{
                     platform: (details.platform as any) || 'Amazon',
@@ -121,21 +145,24 @@ export function ProductDetailsPanel() {
           </div>
 
           {/* Reviews Section */}
-          <div className="border border-border rounded-lg bg-card overflow-hidden">
+          <div className="border border-border rounded-lg bg-card overflow-hidden card-smooth card-hover shadow-sm">
             <button
               onClick={() => toggleSection('reviews')}
-              className="w-full flex items-center justify-between p-4 hover:bg-muted/50 transition-colors"
+              className="w-full flex items-center justify-between p-4 sm:p-5 hover:bg-muted/30 transition-colors duration-200"
             >
-              <h3 className="font-semibold text-foreground">⭐ Customer Reviews</h3>
+              <div className="text-left">
+                <h3 className="font-bold text-lg text-foreground">⭐ Customer Reviews & Ratings</h3>
+                <p className="text-xs text-muted-foreground mt-0.5">Verified customer feedback</p>
+              </div>
               <ChevronDown
-                className={`h-5 w-5 text-muted-foreground transition-transform ${
+                className={`h-5 w-5 text-muted-foreground transition-transform duration-300 flex-shrink-0 ${
                   expandedSections.reviews ? 'rotate-180' : ''
                 }`}
               />
             </button>
             
             {expandedSections.reviews && (
-              <div className="border-t border-border px-4 pb-4 pt-4">
+              <div className="border-t border-border px-4 sm:px-5 pb-4 sm:pb-5 pt-4 animate-slide-down">
                 <ReviewsSection
                   reviews={[
                     {

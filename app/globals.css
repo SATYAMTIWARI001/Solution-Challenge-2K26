@@ -90,12 +90,130 @@
     backdrop-filter: blur(12px);
     border: 1px solid hsl(210 16% 25% / 0.2);
   }
+
+  /* Smooth transitions */
+  .card-smooth {
+    @apply transition-all duration-300 ease-out;
+  }
+
+  .section-smooth {
+    @apply transition-all duration-300 ease-in-out;
+  }
+
+  /* Responsive spacing */
+  .card-padding {
+    @apply p-3 sm:p-4 md:p-5;
+  }
+
+  .section-spacing {
+    @apply space-y-3 sm:space-y-4 md:space-y-6;
+  }
+
+  /* Badge styles */
+  .badge-success {
+    @apply bg-success/10 text-success border border-success/20;
+  }
+
+  .badge-destructive {
+    @apply bg-destructive/10 text-destructive border border-destructive/20;
+  }
+
+  .badge-warning {
+    @apply bg-warning/10 text-warning border border-warning/20;
+  }
+
+  .badge-info {
+    @apply bg-info/10 text-info border border-info/20;
+  }
+
+  /* Hover effects */
+  .card-hover {
+    @apply hover:shadow-lg hover:border-primary/50 transition-all duration-300;
+  }
+
+  .button-smooth {
+    @apply transition-all duration-200 active:scale-95;
+  }
+
+  /* Status indicators */
+  .status-dot {
+    @apply relative inline-block w-2 h-2 rounded-full;
+  }
+
+  .status-dot-pulse {
+    @apply animate-pulse;
+  }
 }
 
 /* Animations */
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(-6px); }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.8; }
+}
+
+@keyframes chartBar {
+  from {
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+  to {
+    transform: scaleX(1);
+    transform-origin: left;
+  }
+}
+
+@layer components {
+  .animate-slide-up {
+    animation: slideUp 0.3s ease-out;
+  }
+
+  .animate-slide-down {
+    animation: slideDown 0.3s ease-out;
+  }
+
+  .animate-fade-in {
+    animation: fadeIn 0.3s ease-out;
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-chart-bar {
+    animation: chartBar 0.6s ease-out;
+  }
 }
 
 @keyframes bounce-subtle {
