@@ -3,9 +3,8 @@
 import { useState } from 'react';
 import { fetchProductDetails } from '@/lib/productDetailsApi';
 
-
 export function ProductDetailsPanel() {
-  const [details, setDetails] = useState(null);
+  const [details, setDetails] = useState<any>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
