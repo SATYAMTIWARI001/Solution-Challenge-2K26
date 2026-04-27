@@ -135,3 +135,25 @@ function PriceRow({
     </>
   );
 }
+export function ProductComparisonCard({ group, className }: ProductComparisonCardProps) {
+  return (
+    <div className={cn('p-4', className)}>
+      <h2 className="text-lg font-semibold mb-2">{group.title}</h2>
+
+      <div className="space-y-3">
+        {group.products.map((product) => (
+          <PriceRow
+            key={product.id}
+            product={product}
+            groupId={group.groupId}
+            isCheapest={product.id === group.cheapest.id}
+            isCostliest={product.id === group.costliest.id}
+            isBestValue={product.id === group.bestValue.id}
+            isFastest={product.id === group.fastestDelivery.id}
+            isTopRated={product.id === group.topRated.id}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
