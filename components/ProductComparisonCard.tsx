@@ -26,7 +26,7 @@ import { PlatformLogo } from '@/components/PlatformLogo';
 import { PriceChart } from '@/components/PriceChart';
 import { ReviewsSection } from '@/components/ReviewsSection';
 import { PriceAlertModal } from '@/components/PriceAlertModal';
-import { cn } from '@/lib/utils';
+import { cn, sanitizeUrl } from '@/lib/utils';
 import { ProductGroup, NormalizedProduct } from '@/lib/types';
 import { formatPrice, getValueTagColor, getTrustTagColor } from '@/lib/scoreEngines';
 import { useUser } from '@/lib/UserContext';
@@ -58,6 +58,7 @@ function PriceRow({
 
   const isWishlisted = isInWishlist(product.id);
   const inCart = isInCart(product.id);
+  const productUrl = product.productUrl ? sanitizeUrl(product.productUrl) : '';
 
   const platformBgClass = {
     Amazon: 'bg-amazon-bg border-amazon/30',
@@ -104,16 +105,15 @@ function PriceRow({
             <Bell className="h-4 w-4" />
           </Button>
 
-          {/* ✅ FIXED PART */}
-          {product.productUrl ? (
+          {productUrl ? (
             <a
-              href={product.productUrl}
+              href={productUrl}
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => {
-                console.log('product link', product.productUrl);
+                console.log('product link', productUrl);
               }}
-              className={cn(buttonVariants({ size: 'sm' }), "ml-auto")}
+              className={cn(buttonVariants({ size: 'sm' }), 'ml-auto')}
             >
               Visit Store
               <ExternalLink className="h-3 w-3 ml-1.5" />
