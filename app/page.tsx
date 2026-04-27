@@ -23,6 +23,7 @@ import {
   Search
 } from 'lucide-react';
 import { PlatformBadge } from '@/components/PlatformLogo';
+import LiveReviews from '@/components/LiveReviews';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { useUser } from '@/lib/UserContext';
@@ -263,6 +264,7 @@ export default function HomePage() {
                   <ProductComparisonCard key={group.groupId} group={group} />
                 ))}
               </div>
+              <LiveReviews />
             </div>
           ) : hasSearched && !isLoading ? (
             <div className="text-center py-16">
