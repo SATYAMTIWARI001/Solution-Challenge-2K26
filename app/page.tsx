@@ -383,9 +383,14 @@ export default function HomePage() {
                 <ShoppingBag className="h-5 w-5 text-primary" />
                 <span className="font-semibold">NovaMart</span>
               </div>
-              <p className="text-sm text-muted-foreground text-center">
-                Compare prices across Amazon, Flipkart & Meesho. Find the best deals instantly.
-              </p>
+              <div className="text-center">
+                <p className="text-sm text-muted-foreground">
+                  Compare prices across Amazon, Flipkart & Meesho. Find the best deals instantly.
+                </p>
+                <p className="text-xs text-muted-foreground/80 mt-1">
+                  Made by Satyam Tiwari, CEO.
+                </p>
+              </div>
               <div className="flex gap-2">
                 <PlatformBadge platform="Amazon" />
                 <PlatformBadge platform="Flipkart" />
