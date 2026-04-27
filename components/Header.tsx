@@ -10,11 +10,14 @@ import {
   LogOut, 
   ChevronDown,
   Settings,
-  Search
+  Search,
+  Moon,
+  Sun
 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useUser } from '@/lib/UserContext';
 import { AuthModal } from '@/components/AuthModal';
+import { useTheme } from '@/lib/ThemeContext';
 
 interface HeaderProps {
   onOpenCart?: () => void;
@@ -24,6 +27,7 @@ interface HeaderProps {
 
 export function Header({ onOpenCart, onOpenWishlist, onOpenAlerts }: HeaderProps) {
   const { state, logout } = useUser();
+  const { theme, setTheme, isDark } = useTheme();
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [showUserMenu, setShowUserMenu] = useState(false);
 
@@ -89,6 +93,20 @@ export function Header({ onOpenCart, onOpenWishlist, onOpenAlerts }: HeaderProps
                 <span className="absolute -top-1 -right-1 h-5 w-5 rounded-full bg-destructive text-destructive-foreground text-xs flex items-center justify-center">
                   {alertsCount}
                 </span>
+              )}
+            </Button>
+
+            {/* Theme Toggle */}
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(isDark ? 'light' : 'dark')}
+              title={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+            >
+              {isDark ? (
+                <Sun className="h-5 w-5" />
+              ) : (
+                <Moon className="h-5 w-5" />
               )}
             </Button>
 
